@@ -1,4 +1,4 @@
-package Exercises;
+package XMLscanner;
 
 import java.io.File;
 import java.util.Scanner;
