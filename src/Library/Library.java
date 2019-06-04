@@ -3,7 +3,7 @@ package Library;
 public class Library {
 
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.2";
+        final String appName = "Biblioteka v0.3";
 
         Book book1 = new Book("W pustyni i w puszczy",
                 "Henryk Sienkiewicz",
@@ -24,10 +24,11 @@ public class Library {
                 "Bert Bates, Katherine Sierra",
                 2008,
                 851,
-                "McGraw-Hill Osborne Media",
-                "9780071591065");
+                "McGraw-Hill Osborne Media");
         book1.printInfo();
         book2.printInfo();
         book3.printInfo();
+
+
     }
 }
