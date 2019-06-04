@@ -22,12 +22,14 @@ public class Bank {
         client1.lastName = "Kowalski";
         client1.pesel = "1500100900";
         client1.livingAdress = adress1;
+        client1.postAdress = adress1;
 
         Person client2 = new Person();
-        client1.firstName = "Daria";
-        client1.lastName = "Kurczak";
-        client1.pesel = "1300100900";
-        client1.livingAdress = adress2;
+        client2.firstName = "Daria";
+        client2.lastName = "Kurczak";
+        client2.pesel = "1300100900";
+        client2.livingAdress = adress1;
+        client2.postAdress = adress2;
 
         BankAccount account1 = new BankAccount();
         account1.owner = client1;
@@ -49,13 +51,13 @@ public class Bank {
 
         System.out.println("Osoba 1:");
         System.out.println(client1.firstName + " " + client1.lastName + " " + client1.pesel);
-        System.out.println("Mieszka w miejscowości " + client1.livingAdress.city);
+        System.out.println("Mieszka w miejscowości " + client1.postAdress.city);
         System.out.println("posiada konto bankowe z kwotą: " + account1.balance);
         System.out.println("oraz kredyt na kwotę: " + credit1.cashBorrowed);
 
         System.out.println("Osoba 2:");
         System.out.println(client2.firstName + " " + client2.lastName + " " + client1.pesel);
-        System.out.println("Mieszka w miejscowości " + client2.livingAdress.city);
+        System.out.println("Mieszka w miejscowości " + client2.postAdress.city);
         System.out.println("posiada konto bankowe z kwotą: " + account2.balance);
     }
 }

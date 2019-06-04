@@ -6,5 +6,6 @@ public class Person {
     String lastName;
     String pesel;
     Adress livingAdress;
+    Adress postAdress;
 
 }
