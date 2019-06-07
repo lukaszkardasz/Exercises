@@ -1,9 +1,11 @@
-package Library;
+package Library.app;
+
+import Library.model.Book;
 
 public class Library {
 
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.3";
+        final String appName = "Biblioteka v0.5";
 
         Book book1 = new Book("W pustyni i w puszczy",
                 "Henryk Sienkiewicz",
@@ -25,6 +27,9 @@ public class Library {
                 2008,
                 851,
                 "McGraw-Hill Osborne Media");
+
+        System.out.println(appName);
+        System.out.println("Książki dostępne w bibliotece:");
         book1.printInfo();
         book2.printInfo();
         book3.printInfo();

@@ -1,7 +1,7 @@
 package Exercises.Point.app;
 
-import Exercises.Point.Controller.PointController;
-import Exercises.Point.Data.Point;
+import Exercises.Point.controller.PointController;
+import Exercises.Point.data.Point;
 
 /**
  * @author n2god on 07/06/2019

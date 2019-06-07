@@ -1,6 +1,6 @@
-package Exercises.Point.Controller;
+package Exercises.Point.controller;
 
-import Exercises.Point.Data.Point;
+import Exercises.Point.data.Point;
 
 /**
  * @author n2god on 07/06/2019

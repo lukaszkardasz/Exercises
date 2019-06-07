@@ -1,4 +1,4 @@
-package Exercises.Point.Data;
+package Exercises.Point.data;
 
 /**
  * @author n2god on 07/06/2019
