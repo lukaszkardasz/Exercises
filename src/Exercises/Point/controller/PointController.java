@@ -8,20 +8,20 @@ import Exercises.Point.data.Point;
  */
 public class PointController {
 
-    public void addX(Point point){
+    public void addX(Point point) {
         point.setxPosition(point.getxPosition() + 1);
     }
 
-    public void minusX (Point point){
+    public void minusX(Point point) {
         point.setxPosition(point.getxPosition() - 1);
     }
 
-    public void addY(Point point){
-        point.setxPosition(point.getyPosition() + 1);
+    public void addY(Point point) {
+        point.setyPosition(point.getyPosition() + 1);
     }
 
-    public void minusY (Point point){
-        point.setxPosition(point.getyPosition() - 1);
+    public void minusY(Point point) {
+        point.setyPosition(point.getyPosition() - 1);
     }
 
 }
