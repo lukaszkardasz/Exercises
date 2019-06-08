@@ -24,8 +24,6 @@ public class Book {
     }
 
     //getters and setters
-
-
     public String getTitle() {
         return title;
     }
@@ -75,9 +73,11 @@ public class Book {
     }
 
     public void printInfo(){
-
         String info = title + "; " + author + "; " + releaseDate + "; "
-                + pages + "; " + publisher + "; " + isbn;
+                + pages + "; " + publisher;
+        if (isbn != null){
+            info += "; " + isbn;
+        }
         System.out.println(info);
     }
 
