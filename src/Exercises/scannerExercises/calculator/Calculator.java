@@ -8,20 +8,20 @@ public class Calculator {
 
     public double calculate (double a, double b, String operator){
         double result = 0;
-
+        Exercises.calculator.Calculator calculator = new Exercises.calculator.Calculator();
         switch (operator) {
             case "+":
-                result = a + b;
+                result = calculator.add(a,b);
                 break;
             case "-":
-                result = a - b;
+                result = calculator.substract(a,b);
                 break;
             case "*":
-                result = a * b;
+                result = calculator.multiply(a,b);
                 break;
             case "/":
                 if (b != 0){
-                    result = a / b;
+                    result = calculator.divide(a,b);
                 } else System.out.println("Sorka, nie dzielimy przez 0!");
                 System.exit(1);
                 break;
