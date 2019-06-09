@@ -1,4 +1,6 @@
-package Library.model;
+package Library.Data;
+
+import Library.model.Library;
 
 public class Book {
     // variables
