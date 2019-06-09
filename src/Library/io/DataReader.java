@@ -1,6 +1,6 @@
 package Library.io;
 
-import Library.model.Book;
+import Library.Data.Book;
 
 import java.util.Scanner;
 
@@ -26,13 +26,16 @@ public class DataReader {
         System.out.println("ISBN: ");
         String isbn = scanner.nextLine();
         System.out.println("Rok wydania: ");
-        int releaseDate = scanner.nextInt();
-        scanner.nextLine();
+        int releaseDate = getInt();
         System.out.println("Ilość stron: ");
-        int pages = scanner.nextInt();
-        scanner.nextLine();
+        int pages = getInt();
 
         return  new Book(title, author, releaseDate, pages, publisher, isbn);
+    }
+    public int getInt(){
+        int resutl = scanner.nextInt();
+        scanner.nextLine();
+        return resutl;
     }
 
 }
