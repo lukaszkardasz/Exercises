@@ -11,14 +11,7 @@ import java.util.*;
  */
 public class ArrayRotation {
 
-    static int[] rotLeft(int[] integers, int rotateNumber) {
-        int[] rotatedArray = new int[integers.length];
-        int rotations = rotateNumber % integers.length;
-        //TODO add rotation algorithm
 
-
-        return rotatedArray;
-    }
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -31,5 +24,40 @@ public class ArrayRotation {
         for (int i = 0; i < integers.length; i++) {
             integers[i] = Integer.parseInt(integerStrings[i]);
         }
+
+
+        int[] rotatedArray = rotLeft(integers, rotateNumber);
+        printArray(rotatedArray);
+
     }
+
+    private static void printArray(int[] rotatedArray) {
+        for (int i = 0; i < rotatedArray.length; i++) {
+            System.out.print(rotatedArray[i] + " ");
+        }
+    }
+
+    private static int[] rotLeft(int[] integers, int rotateNumber) {
+        int[] rotatedArray = new int[integers.length];
+        int rotations = rotateNumber % integers.length;
+        int lenght = rotatedArray.length;
+        rotatedArray = integers;
+        leftRotate(rotatedArray, lenght, rotations);
+        return rotatedArray;
+    }
+
+    private static void leftRotate(int[] rotateArray, int lenght, int rotations){
+        for (int i = 0; i < lenght; i++)
+            leftRotatebyOne(rotateArray, rotations);
+    }
+
+    private static void leftRotatebyOne(int[] rotateArray, int rotations) {
+        int i, temp;
+        temp = rotateArray[0];
+        for (i = 0; i < rotations - 1; i++) {
+            rotateArray[i] = rotateArray[i + 1];
+            rotateArray[i] = temp;
+        }
+    }
+
 }
