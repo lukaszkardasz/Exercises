@@ -41,4 +41,14 @@ public class Student {
     public int hashCode() {
         return Objects.hash(name, age);
     }
+
+    public void printInfo(){
+        System.out.println(name + " " + age);
+    }
+
+    @Override
+    public String toString() {
+        return "name= " + name +
+                ", age= " + age;
+    }
 }

@@ -17,6 +17,8 @@ public class School {
         System.out.println(hashCode1);
         System.out.println(hashCode2);
         System.out.println(hashCode3);
+        System.out.println(student1.toString());
+        System.out.println("Hash: " + Integer.toHexString(student1.hashCode()));
 
 
     }
