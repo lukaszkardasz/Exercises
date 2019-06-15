@@ -1,6 +1,8 @@
 package Library.model;
 
-public class Magazine extends  Publication {
+import java.util.Objects;
+
+public class Magazine extends Publication {
 
     private int month;
     private int day;
@@ -36,10 +38,12 @@ public class Magazine extends  Publication {
         this.language = language;
     }
 
-    public void printInfo() {
-        String info = getTitle() + "; " + getPublisher() + "; " + getYear() + "-"
-                + month + "-" + day + "; " + language;
-        System.out.println(info);
-    }
 
+
+    @Override
+    public String toString() {
+        return  "month: " + month +
+                ", day: " + day +
+                ", language: " + language;
+    }
 }
