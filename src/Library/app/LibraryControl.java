@@ -10,22 +10,16 @@ import Library.model.Magazine;
  * @project Exercises
  */
 public class LibraryControl {
-
-    private static final int EXIT = 0;
-    private static final int ADD_BOOK = 1;
-    private static final int ADD_MAGAZINE = 2;
-    private static final int PRINT_BOOKS = 3;
-    private static final int PRINT_MAGAZINES = 4;
-
     private DataReader dataReader = new DataReader();
+
     private Library library = new Library();
 
     public void controlLoop() {
-        int option = -1;
+        Option option;
 
         do {
             printOptions();
-            option = dataReader.getInt();
+            option = Option.createEnumFromInt(dataReader.getInt());
             switch (option) {
                 case EXIT:
                     exit();
@@ -42,11 +36,8 @@ public class LibraryControl {
                 case PRINT_MAGAZINES:
                     printMagazines();
                     break;
-                default:
-                    System.out.println("Nieprawidłowe dane, spróbuj jeszcze raz");
-                    break;
             }
-        } while (option != EXIT);
+        } while (option != Option.EXIT);
 
     }
 
@@ -71,11 +62,9 @@ public class LibraryControl {
 
     private void printOptions() {
         System.out.println("Wybierz opcję: ");
-        System.out.println(EXIT + " - wyjście z programu");
-        System.out.println(ADD_BOOK + " - dodanie nowej książki");
-        System.out.println(ADD_MAGAZINE + " - dodanie nowego magazynu");
-        System.out.println(PRINT_BOOKS + " - wyświetl dostępne książki");
-        System.out.println(PRINT_MAGAZINES + " - wyświetl dostępne magazyny");
+        for (Option option : Option.values()){
+            System.out.println(option);
+        }
     }
 
     private void exit() {
