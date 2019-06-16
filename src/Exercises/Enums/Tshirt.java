@@ -10,6 +10,4 @@ public class Tshirt {
     public void setSize(Size size) {
         this.size = size;
     }
-
-
 }
