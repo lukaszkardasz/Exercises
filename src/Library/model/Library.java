@@ -1,5 +1,7 @@
 package Library.model;
 
+import java.util.Arrays;
+
 /**
  * @author n2god on 09/06/2019
  * @project Exercises
@@ -54,4 +56,13 @@ public class Library {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < publicationsNumber; i++) {
+            builder.append(publications[i]);
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
 }
