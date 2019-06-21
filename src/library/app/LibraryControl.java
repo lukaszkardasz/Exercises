@@ -1,9 +1,9 @@
-package Library.app;
+package library.app;
 
-import Library.model.Book;
-import Library.io.DataReader;
-import Library.model.Library;
-import Library.model.Magazine;
+import library.model.Book;
+import library.io.DataReader;
+import library.model.Library;
+import library.model.Magazine;
 
 /**
  * @author n2god on 09/06/2019

@@ -1,6 +1,4 @@
-package Library.model;
-
-import java.util.Objects;
+package library.model;
 
 public class Magazine extends Publication {
 
