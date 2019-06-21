@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author n2god on 09/06/2019
- * @project Exercises
+ * @project org
  */
 public class Library {
 

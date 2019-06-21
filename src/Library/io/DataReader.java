@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * @author n2god on 09/06/2019
- * @project Exercises
+ * @project org
  */
 public class DataReader {
 

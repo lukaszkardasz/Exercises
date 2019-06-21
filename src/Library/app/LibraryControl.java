@@ -7,7 +7,7 @@ import Library.model.Magazine;
 
 /**
  * @author n2god on 09/06/2019
- * @project Exercises
+ * @project org
  */
 public class LibraryControl {
     private DataReader dataReader = new DataReader();
