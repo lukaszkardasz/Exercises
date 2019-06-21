@@ -1,24 +1,40 @@
 package Exercises.exceptions.schoolExercise;
 
-import Exercises.loops.hospitalExercise.model.Patient;
 
 /**
  * @author n2god on 20/06/2019
  * @project Exercises
  */
 public class School {
-    private final int MAX_STUDENT_NUMBER = 10;
-    Student[] school = new Student[MAX_STUDENT_NUMBER];
-    public int students_number = 0;
-    public void add(Student student){
-        if (students_number < MAX_STUDENT_NUMBER){
-            school[students_number] = student;
-            students_number++;
-        } else {
-            throw new StudentMaxNumberException;
+    private Student[] students;
+    public int studentsNumber = 0;
+
+    public School(int studentsNumber) {
+        students = new Student[studentsNumber];
     }
 
-    public void find(String name, String surname){
 
+    public void add(Student student) throws StudentMaxNumberException {
+        if (studentsNumber >= students.length) {
+            throw new StudentMaxNumberException("Brak miejsca w szkole: " + students.length);
+        } else {
+            students[studentsNumber] = student;
+            studentsNumber++;
+        }
+    }
+
+    public Student find(String name, String surname) throws ElementNotFoundException {
+        boolean found = false;
+        int index = 0;
+        while (!found && studentsNumber < students.length) {
+
+            if (students[index].getName().equals(name) && students[index].getSurname().equals(surname)) {
+                return students[index];
+            } else {
+                index++;
+            }
+        }
+        throw new ElementNotFoundException("Nie znaleziono studenta o imieniu: " + name + " " + surname);
     }
 }
+
