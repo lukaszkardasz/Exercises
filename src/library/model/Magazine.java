@@ -40,7 +40,9 @@ public class Magazine extends Publication {
 
     @Override
     public String toString() {
-        return  "month: " + month +
+        return  "title: " + getTitle() +
+                ", year: " + getYear() +
+                ", month: " + month +
                 ", day: " + day +
                 ", language: " + language;
     }
