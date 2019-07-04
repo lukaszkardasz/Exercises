@@ -1,4 +1,4 @@
-package ex.org.files.files_exercises;
+package ex.org.files.files_exercises.read;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,7 +15,7 @@ public class TryWithResources {
             }
             System.out.println("imion: " + lines);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
 }

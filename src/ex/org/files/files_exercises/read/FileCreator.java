@@ -1,4 +1,4 @@
-package ex.org.files.files_exercises;
+package ex.org.files.files_exercises.read;
 
 import java.io.File;
 import java.io.IOException;

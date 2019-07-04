@@ -1,7 +1,6 @@
-package ex.org.files.files_exercises;
+package ex.org.files.files_exercises.read;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
