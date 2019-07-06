@@ -1,7 +1,6 @@
 package ex.org.files.files_exercises.person_files;
 
 import java.io.*;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -39,7 +38,7 @@ public class CompanyApp {
 
         try (Scanner sc = new Scanner(System.in);
              ObjectOutputStream objectStream = new ObjectOutputStream(new FileOutputStream(FILE_STORE))) {
-            for (int i = 0; i < Company.EMPLOYEES; i++) {
+            for (int i = 0; i < Company.MAX_NUMBER_WORKERS; i++) {
                 System.out.println("Podaj imię: ");
                 String firstName = sc.nextLine();
 
@@ -50,7 +49,7 @@ public class CompanyApp {
                 double salary = sc.nextDouble();
                 sc.nextLine();
 
-                company.add(new Employee(firstName, lastName, salary), i);
+                company.add(new TableOfEmployees(firstName, lastName, salary), i);
             }
 
             objectStream.writeObject(company);
@@ -67,8 +66,8 @@ public class CompanyApp {
 
             company = (Company)input.readObject();
 
-            for (int i = 0; i < Company.EMPLOYEES; i++) {
-                System.out.println(company.getEmployees()[i]);
+            for (int i = 0; i < Company.MAX_NUMBER_WORKERS; i++) {
+                System.out.println(company.getTableEmployers()[i]);
             }
 
         } catch (IOException | ClassNotFoundException e) {

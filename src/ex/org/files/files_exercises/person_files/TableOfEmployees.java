@@ -6,13 +6,13 @@ import java.io.Serializable;
  * @author n2god on 06/07/2019
  * @project Exercises
  */
-public class Employee extends Person implements Serializable {
+public class TableOfEmployees extends Person implements Serializable {
 
     private static final long serialVersionUID = 1812014377088226529L;
 
     private double salary;
 
-    public Employee(String firstName, String lastName, double salary) {
+    public TableOfEmployees(String firstName, String lastName, double salary) {
         super(firstName, lastName);
         this.salary = salary;
     }

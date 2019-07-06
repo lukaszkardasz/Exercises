@@ -9,19 +9,19 @@ import java.io.Serializable;
 public class Company implements Serializable {
 
     private static final long serialVersionUID = -3425273230264572679L;
-    public static final int EMPLOYEES = 3;
+    public static final int MAX_NUMBER_WORKERS = 3;
 
-    private Employee[] employees = new Employee[EMPLOYEES];
+    private TableOfEmployees[] tableEmployers = new TableOfEmployees[MAX_NUMBER_WORKERS];
 
-    public Employee[] getEmployees() {
-        return employees;
+    public TableOfEmployees[] getTableEmployers() {
+        return tableEmployers;
     }
 
-    public void setEmployees(Employee[] employees) {
-        this.employees = employees;
+    public void setTableEmployers(TableOfEmployees[] tableEmployers) {
+        this.tableEmployers = tableEmployers;
     }
 
-    public void add(Employee employee, int index){
-        employees[index] = employee;
+    public void add(TableOfEmployees tableOfEmployees, int index){
+        tableEmployers[index] = tableOfEmployees;
     }
 }
