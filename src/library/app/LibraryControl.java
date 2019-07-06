@@ -1,7 +1,12 @@
 package library.app;
 
+import library.exception.DataExportException;
+import library.exception.DataImportException;
+import library.exception.NoSuchFiletypeException;
 import library.exception.NoSuchOptionException;
 import library.io.ConsolePrinter;
+import library.io.file.FileManager;
+import library.io.file.FileManagerBuilder;
 import library.model.Book;
 import library.io.DataReader;
 import library.model.Library;
@@ -17,10 +22,29 @@ import java.util.InputMismatchException;
 public class LibraryControl {
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
+    private FileManager fileManager;
 
-    private Library library = new Library();
+    private Library library;
 
-    public void controlLoop() {
+
+
+    LibraryControl() {
+        try {
+            fileManager = new FileManagerBuilder(printer, dataReader).build();
+        } catch (NoSuchFiletypeException e) {
+            e.getMessage();
+        }
+        try {
+            library = fileManager.importData();
+            printer.printLine("Zaimportowane dane z pliku");
+        } catch (DataImportException e) {
+            printer.printLine(e.getMessage());
+            printer.printLine("Zainicjowano nową bazę.");
+            library = new Library();
+        }
+    }
+
+    void controlLoop() {
         Option option;
 
         do {
@@ -53,7 +77,7 @@ public class LibraryControl {
         Option option = null;
         while (!optionOk) {
             try {
-                option = Option.createEnumFromInt(dataReader.getInt());
+                option = Option.createFromInt(dataReader.getInt());
                 optionOk = true;
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage() + ", podaj ponownie:");
@@ -105,25 +129,29 @@ public class LibraryControl {
     }
 
     private void exit() {
-        printer.printLine("Koniec programu, papa!");
-        // zamykamy strumień wejścia
+        try {
+            fileManager.exportData(library);
+            printer.printLine("Export danych do pliku zakończony powodzeniem");
+        } catch (DataExportException e) {
+            printer.printLine(e.getMessage());
+        }
         dataReader.close();
+        printer.printLine("Koniec programu, papa!");
     }
 
-    private enum Option{
-        EXIT(0, "Wyjscie z programu"),
-        ADD_BOOK(1, "Dodaj książkę"),
-        ADD_MAGAZINE(2, "Dodaj magazyn"),
-        PRINT_BOOKS(3, "Wypisz książki"),
-        PRINT_MAGAZINES(4, "Wypisz magazyny");
+    private enum Option {
+        EXIT(0, "Wyjście z programu"),
+        ADD_BOOK(1, "Dodanie książki"),
+        ADD_MAGAZINE(2,"Dodanie magazynu/gazety"),
+        PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
+        PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet");
 
         private int value;
         private String description;
 
-
-        Option(int value, String description) {
+        Option(int value, String desc) {
             this.value = value;
-            this.description = description;
+            this.description = desc;
         }
 
         @Override
@@ -131,11 +159,11 @@ public class LibraryControl {
             return value + " - " + description;
         }
 
-        static Option createEnumFromInt(int option) throws NoSuchOptionException {
+        static Option createFromInt(int option) throws NoSuchOptionException {
             try {
                 return Option.values()[option];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new NoSuchOptionException("Brak opcji o id: " + option);
+            } catch(ArrayIndexOutOfBoundsException e) {
+                throw new NoSuchOptionException("Brak opcji o id " + option);
             }
         }
     }
