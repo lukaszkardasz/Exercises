@@ -65,7 +65,7 @@ public class DataReader {
         printer.printLine("Dzień: ");
         int day = getInt();
 
-        return new Magazine(year, month, day, publisher, language, title);
+        return new Magazine(title, publisher, language, year, month, day);
     }
 
 

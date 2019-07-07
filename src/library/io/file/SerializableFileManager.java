@@ -12,7 +12,7 @@ import java.io.*;
  */
 
 public class SerializableFileManager implements FileManager {
-    static final String FILE_NAME = "C:\\java\\Exercises\\src\\library\\io\\file\\library.o";
+    static final String FILE_NAME = "C:\\java\\Exercises\\src\\library\\library.o";
 
     @Override
     public Library importData() throws DataImportException {

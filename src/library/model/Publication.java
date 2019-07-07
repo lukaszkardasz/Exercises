@@ -4,41 +4,45 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Publication implements Serializable {
-
-    private int year;
     private String title;
     private String publisher;
+    private int year;
 
-    Publication(int year, String title, String publisher) {
-        this.year = year;
+    Publication(String title, String publisher, int year) {
         this.title = title;
+        this.publisher = publisher;
+        this.year = year;
+    }
+
+    int getYear() {
+        return year;
+    }
+
+    void setYear(int year) {
+        this.year = year;
+    }
+
+    String getTitle() {
+        return title;
+    }
+
+    void setTitle(String title) {
+        this.title = title;
+    }
+
+    String getPublisher() {
+        return publisher;
+    }
+
+    void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
     public abstract String toCsv();
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    @Override
+    public String toString() {
+        return title + ", " + publisher + ", " + year;
     }
 
     @Override
@@ -53,11 +57,6 @@ public abstract class Publication implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(year, title, publisher);
-    }
-
-    @Override
-    public String toString() {
-        return "Title: " + getTitle() + ", Publisher: " + getPublisher() + ", year: " + getYear();
+        return Objects.hash(title, publisher, year);
     }
 }

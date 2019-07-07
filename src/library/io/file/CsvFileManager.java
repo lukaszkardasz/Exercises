@@ -16,11 +16,10 @@ import java.util.Scanner;
  * @project Exercises
  */
 public class CsvFileManager implements FileManager {
-    static final String FILE_NAME = "C:\\java\\Exercises\\src\\library\\io\\file\\library.csv";
-
+    private static final String FILE_NAME = "C:\\java\\Exercises\\src\\library\\Library.csv";
 
     @Override
-    public void exportData(Library library) {
+    public void exportData(Library library) throws DataExportException {
         Publication[] publications = library.getPublications();
         try (FileWriter fileWriter = new FileWriter(FILE_NAME);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
@@ -28,19 +27,13 @@ public class CsvFileManager implements FileManager {
                 bufferedWriter.write(publication.toCsv());
                 bufferedWriter.newLine();
             }
-
         } catch (IOException e) {
-            try {
-                throw new DataExportException("Błąd zapisu danych do pliku: " + FILE_NAME);
-            } catch (DataExportException ex) {
-                ex.printStackTrace();
-            }
+            throw new DataExportException("Błąd zapisu danych do pliku " + FILE_NAME);
         }
-
     }
 
     @Override
-    public Library importData() {
+    public Library importData() throws DataImportException {
         Library library = new Library();
         try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
             while (fileReader.hasNextLine()) {
@@ -48,29 +41,31 @@ public class CsvFileManager implements FileManager {
                 Publication publication = createObjectFromString(line);
                 library.addPublication(publication);
             }
-        } catch (FileNotFoundException e) {
-            try {
-                throw new DataImportException("Brak pliku: " + FILE_NAME);
-            } catch (DataImportException ex) {
-                ex.printStackTrace();
-            }
+        } catch (FileNotFoundException | InvalidDataException e) {
+            throw new DataImportException("Brak pliku " + FILE_NAME);
         }
         return library;
     }
 
-    private Publication createObjectFromString(String csvText) {
+    private Publication createObjectFromString(String csvText) throws InvalidDataException {
         String[] split = csvText.split(";");
         String type = split[0];
-        if (Book.TYPE.equals(type)){
+        if(Book.TYPE.equals(type)) {
             return createBook(split);
-        } else if (Magazine.TYPE.equals(type)){
+        } else if(Magazine.TYPE.equals(type)) {
             return createMagazine(split);
         }
-        try {
-            throw new InvalidDataException("Nieznany typ publikacji: " + type);
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        }
+        throw new InvalidDataException("Nieznany typ publikacji: " + type);
+    }
+
+    private Book createBook(String[] data) {
+        String title = data[1];
+        String publisher = data[2];
+        int year = Integer.valueOf(data[3]);
+        String author = data[4];
+        int pages = Integer.valueOf(data[5]);
+        String isbn = data[6];
+        return new Book(title, author, year, pages, publisher, isbn);
     }
 
     private Magazine createMagazine(String[] data) {
@@ -80,16 +75,7 @@ public class CsvFileManager implements FileManager {
         int month = Integer.valueOf(data[4]);
         int day = Integer.valueOf(data[5]);
         String language = data[6];
-        return new Magazine(year, month, day, language, publisher, title);
+        return new Magazine(title, publisher, language, year, month, day);
     }
 
-    private Book createBook(String[] data) {
-        String title = data[1];
-        String author = data[2];
-        int year = Integer.valueOf(data[3]);
-        int pages = Integer.valueOf(data[4])
-        String publisher = data[5];
-        String isbn = data[6];
-        return new Book(title, author, year, pages, publisher, isbn);
-    }
 }

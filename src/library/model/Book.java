@@ -2,32 +2,29 @@ package library.model;
 
 import java.util.Objects;
 
-public class Book extends Publication{
-    // variables
-
-    public static final String TYPE = "książka";
+public class Book extends Publication {
+    public static final String TYPE = "Książka";
+    // Pola
     private String author;
     private int pages;
     private String isbn;
 
-    // constructors
-
-    public Book(String title, String author,int year, int pages, String publisher, String isbn) {
-        super(year, publisher, title);
-        this.author = author;
+    // Konstruktory
+    public Book(String title, String author, int year, int pages, String publisher,
+                String isbn) {
+        super(title, publisher, year);
         this.pages = pages;
+        this.author = author;
         this.isbn = isbn;
     }
 
-    //getters and setters
-
-
-    public String getAuthor() {
-        return author;
+    // settery i gettery
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public int getPages() {
@@ -38,20 +35,12 @@ public class Book extends Publication{
         this.pages = pages;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                " Author: " + getAuthor() +
-                " pages: " + getPages() +
-                " isbn: " + getIsbn();
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
@@ -63,6 +52,11 @@ public class Book extends Publication{
                 author + ";" +
                 pages + ";" +
                 isbn + "";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + author + ", " + pages + ", " + isbn;
     }
 
     @Override
