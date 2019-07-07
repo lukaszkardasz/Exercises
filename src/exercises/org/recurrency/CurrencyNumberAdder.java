@@ -4,19 +4,19 @@ package exercises.org.recurrency;
  * @author n2god on 07/07/2019
  * @project Exercises
  */
-public class NormalNumberAdder {
+public class CurrencyNumberAdder {
 
     public static void main(String[] args) {
-        int number = sum(3);
+        int number = sum(4582);
         System.out.println(number);
     }
 
     private static int sum(int n) {
-        int sum = 0;
-        while (n > 0){
-            sum = sum + n;
-            n--;
+        if (n > 1) {
+            System.out.println(n + "+" + "sum(" + (n-1) + ")");
+            return n + sum(n-1);
+        }else {
+            return n;
         }
-        return sum;
     }
 }
