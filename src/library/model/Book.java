@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Book extends Publication{
     // variables
 
+    public static final String TYPE = "książka";
     private String author;
     private int pages;
     private String isbn;
@@ -51,6 +52,17 @@ public class Book extends Publication{
                 " Author: " + getAuthor() +
                 " pages: " + getPages() +
                 " isbn: " + getIsbn();
+    }
+
+    @Override
+    public String toCsv() {
+        return (TYPE + ";") +
+                getTitle() + ";" +
+                getPublisher() + ";" +
+                getYear() + ";" +
+                author + ";" +
+                pages + ";" +
+                isbn + "";
     }
 
     @Override

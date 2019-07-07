@@ -10,6 +10,7 @@ import java.io.*;
  * @author n2god on 06/07/2019
  * @project Exercises
  */
+
 public class SerializableFileManager implements FileManager {
     static final String FILE_NAME = "C:\\java\\Exercises\\src\\library\\io\\file\\library.o";
 

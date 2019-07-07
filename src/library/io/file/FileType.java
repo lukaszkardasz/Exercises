@@ -5,5 +5,6 @@ package library.io.file;
  * @project Exercises
  */
 public enum FileType {
-    SERIAL;
+    SERIAL,
+    CSV;
 }
