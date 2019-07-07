@@ -1,4 +1,4 @@
-package exercises.org.recurrency;
+package exercises.org.recurrency.number_adder;
 
 /**
  * @author n2god on 07/07/2019
