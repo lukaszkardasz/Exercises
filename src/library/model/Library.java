@@ -1,6 +1,7 @@
 package library.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @author n2god on 09/06/2019
@@ -8,9 +9,9 @@ import java.io.Serializable;
  */
 public class Library implements Serializable {
 
-    public static final int MAX_PUBLICATIONS = 2000;
-    private Publication[] publications = new Publication[MAX_PUBLICATIONS];
+    private static final int INITIAL_CAPACITY = 1;
     private int publicationsNumber;
+    private Publication[] publications = new Publication[INITIAL_CAPACITY];
 
     public Publication[] getPublications() {
         Publication[] result = new Publication[publicationsNumber];
@@ -20,19 +21,29 @@ public class Library implements Serializable {
         return result;
     }
 
-    public void addBook(Book book) {
-        addPublication(book);
-    }
-
-    public void addMagazine(Magazine magazine) {
-        addPublication(magazine);
-    }
-
     public void addPublication(Publication publication) {
-        if(publicationsNumber >= MAX_PUBLICATIONS){
-            throw new ArrayIndexOutOfBoundsException("Max publications exceeded " + MAX_PUBLICATIONS);
+        if (publicationsNumber == publications.length){
+            publications = Arrays.copyOf(publications, publications.length * 2);
         }
         publications[publicationsNumber] = publication;
         publicationsNumber++;
+    }
+
+    public boolean removePublication(Publication pub){
+        final int NOT_FOUND = -1;
+        int found = NOT_FOUND;
+        int i = 0;
+        while (i < publications.length && found == NOT_FOUND){
+            if(pub.equals(publications[i])){
+                found = i;
+            } else{
+                i++;
+            }
+        }
+
+        if(found != NOT_FOUND){
+            System.arraycopy(publications, found +1, publications, found, publications.length - found -1);
+        }
+        return found != NOT_FOUND;
     }
 }
