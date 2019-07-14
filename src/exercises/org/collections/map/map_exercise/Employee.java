@@ -13,7 +13,7 @@ public class Employee {
     private String lastName;
     private BigDecimal salary;
 
-    public Employee(String firstName, String lastName, BigDecimal salary) {
+    public Employee() {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
@@ -60,10 +60,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee[" +
-                "firstName='" + firstName +
-                ", lastName='" + lastName +
-                ", salary=" + salary +
-                ']';
+        return "Pracownik: " + firstName + " " + lastName +
+                ", wyplata: " + salary;
     }
 }

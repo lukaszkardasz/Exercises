@@ -8,8 +8,22 @@ import java.util.Map;
  * @project Exercises
  */
 public class Company {
-    Map<String, Employee> companyMap = new HashMap<>();
+    private HashMap<String, Employee> employees = new HashMap<>();
 
+    public boolean addEmployee(Employee employee){
+        String key = employee.getFirstName() + " " + employee.getLastName();
+        if (employees.get(key) != null){
+            return false;
+        } else{
+            employees.put(key, employee);
+            return true;
+        }
+    }
 
+    //podajemy klucz, zwraca obiekt employee lub null jesli nie ma takiego
+    public Employee getEmployee(String firstName, String lastName){
+        String key = firstName + " " + lastName;
+        return employees.get(key);
+    }
 
 }
