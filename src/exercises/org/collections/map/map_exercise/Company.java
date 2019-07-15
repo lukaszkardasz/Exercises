@@ -1,7 +1,6 @@
 package exercises.org.collections.map.map_exercise;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author n2god on 13/07/2019
@@ -20,7 +19,6 @@ public class Company {
         }
     }
 
-    //podajemy klucz, zwraca obiekt employee lub null jesli nie ma takiego
     public Employee getEmployee(String firstName, String lastName){
         String key = firstName + " " + lastName;
         return employees.get(key);

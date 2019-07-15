@@ -14,9 +14,7 @@ public class Employee {
     private BigDecimal salary;
 
     public Employee() {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
+        /*zawiera imię, nazwisko i pensję*/
     }
 
     public String getFirstName() {
