@@ -2,9 +2,7 @@ package library.model;
 
 import library.exception.PublicationAlreadyExistException;
 import library.exception.UserAlreadyExistsException;
-
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +12,6 @@ import java.util.Map;
  */
 public class Library implements Serializable {
 
-    private int publicationsNumber;
     private Map<String, Publication> publications = new HashMap<>();
     private Map<String, LibraryUser> users = new HashMap<>();
 
