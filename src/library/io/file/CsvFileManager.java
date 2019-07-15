@@ -9,6 +9,7 @@ import library.model.Magazine;
 import library.model.Publication;
 
 import java.io.*;
+import java.util.Collection;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ public class CsvFileManager implements FileManager {
 
     @Override
     public void exportData(Library library) throws DataExportException {
-        Publication[] publications = library.getPublications();
+        Collection<Publication> publications = library.getPublications().values();
         try (FileWriter fileWriter = new FileWriter(FILE_NAME);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             for (Publication publication : publications) {
@@ -61,9 +62,9 @@ public class CsvFileManager implements FileManager {
     private Book createBook(String[] data) {
         String title = data[1];
         String publisher = data[2];
-        int year = Integer.valueOf(data[3]);
+        int year = Integer.parseInt(data[3]);
         String author = data[4];
-        int pages = Integer.valueOf(data[5]);
+        int pages = Integer.parseInt(data[5]);
         String isbn = data[6];
         return new Book(title, author, year, pages, publisher, isbn);
     }
@@ -71,9 +72,9 @@ public class CsvFileManager implements FileManager {
     private Magazine createMagazine(String[] data) {
         String title = data[1];
         String publisher = data[2];
-        int year = Integer.valueOf(data[3]);
-        int month = Integer.valueOf(data[4]);
-        int day = Integer.valueOf(data[5]);
+        int year = Integer.parseInt(data[3]);
+        int month = Integer.parseInt(data[4]);
+        int day = Integer.parseInt(data[5]);
         String language = data[6];
         return new Magazine(title, publisher, language, year, month, day);
     }
