@@ -34,12 +34,13 @@ public class LibraryUser extends User {
         borrowedPublications.add(pub);
     }
 
-    public boolean returnPublication(Publication pub){
+    public boolean returnPublication(Publication pub) {
         boolean result = false;
-        if(borrowedPublications.remove(pub)){
+        if (borrowedPublications.remove(pub)) {
             result = true;
             addPublicationToHistory(pub);
-        } return result;
+        }
+        return result;
     }
 
     @Override
@@ -55,6 +56,11 @@ public class LibraryUser extends User {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), publicationHistory, borrowedPublications);
+    }
+
+    @Override
+    public String toCSV() {
+        return getFirstName() + " ; " + getLastName() + " ; " + getPesel();
     }
 
 }

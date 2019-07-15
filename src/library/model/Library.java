@@ -23,16 +23,12 @@ public class Library implements Serializable {
         return users;
     }
 
-    public void addUser(LibraryUser user){
+    public void addUser(LibraryUser user) throws UserAlreadyExistsException {
         if (users.containsKey(user.getPesel())){
-            try {
-                throw new UserAlreadyExistsException(
+             throw new UserAlreadyExistsException(
                         "Użytkownik ze wskazanym peselem już istnieje " + user.getPesel()
                 );
-            } catch (UserAlreadyExistsException e) {
-                e.printStackTrace();
-                e.getMessage();
-            }
+
         } users.put(user.getPesel(), user);
     }
 

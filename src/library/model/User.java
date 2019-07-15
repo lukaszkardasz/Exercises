@@ -7,11 +7,12 @@ import java.util.Objects;
  * @author n2god on 15/07/2019
  * @project Exercises
  */
-public class User implements Serializable {
+public abstract class User implements Serializable {
 
     private String firstName;
     private String lastName;
     private String pesel;
+
 
     public User(String firstName, String lastName, String pesel) {
         this.firstName = firstName;
@@ -62,4 +63,6 @@ public class User implements Serializable {
     public String toString() {
         return firstName + " " + lastName + " - " + pesel;
     }
+
+    public abstract String toCSV();
 }
