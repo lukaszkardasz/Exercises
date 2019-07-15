@@ -1,7 +1,12 @@
 package library.model;
 
+import library.exception.PublicationAlreadyExistException;
+import library.exception.UserAlreadyExistsException;
+
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author n2god on 09/06/2019
@@ -9,41 +14,51 @@ import java.util.Arrays;
  */
 public class Library implements Serializable {
 
-    private static final int INITIAL_CAPACITY = 1;
     private int publicationsNumber;
-    private Publication[] publications = new Publication[INITIAL_CAPACITY];
+    private Map<String, Publication> publications = new HashMap<>();
+    private Map<String, LibraryUser> users = new HashMap<>();
 
-    public Publication[] getPublications() {
-        Publication[] result = new Publication[publicationsNumber];
-        for (int i = 0; i < publicationsNumber; i++) {
-            result[i] = publications[i];
-        }
-        return result;
+    public Map<String, Publication> getPublications() {
+        return publications;
+    }
+
+    public Map<String, LibraryUser> getUsers() {
+        return users;
+    }
+
+    public void addUser(LibraryUser user){
+        if (users.containsKey(user.getPesel())){
+            try {
+                throw new UserAlreadyExistsException(
+                        "Użytkownik ze wskazanym peselem już istnieje " + user.getPesel()
+                );
+            } catch (UserAlreadyExistsException e) {
+                e.printStackTrace();
+                e.getMessage();
+            }
+        } users.put(user.getPesel(), user);
     }
 
     public void addPublication(Publication publication) {
-        if (publicationsNumber == publications.length){
-            publications = Arrays.copyOf(publications, publications.length * 2);
+        if (publications.containsKey(publication.getTitle())){
+            try {
+                throw new PublicationAlreadyExistException(
+                        "Publikacja o takim tytule już istnieje " + publication.getTitle()
+                );
+            } catch (PublicationAlreadyExistException e) {
+                e.printStackTrace();
+                e.getMessage();
+            }
+            publications.put(publication.getTitle(), publication);
         }
-        publications[publicationsNumber] = publication;
-        publicationsNumber++;
     }
 
     public boolean removePublication(Publication pub){
-        final int NOT_FOUND = -1;
-        int found = NOT_FOUND;
-        int i = 0;
-        while (i < publications.length && found == NOT_FOUND){
-            if(pub.equals(publications[i])){
-                found = i;
-            } else{
-                i++;
-            }
+        if(publications.containsValue(pub)){
+            publications.remove(pub.getTitle());
+            return true;
+        } else{
+            return false;
         }
-
-        if(found != NOT_FOUND){
-            System.arraycopy(publications, found +1, publications, found, publications.length - found -1);
-        }
-        return found != NOT_FOUND;
     }
 }
