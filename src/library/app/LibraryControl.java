@@ -123,11 +123,7 @@ public class LibraryControl {
 
     private void addUser() {
         LibraryUser libraryUser = dataReader.createLibraryUser();
-        try {
-            library.addUser(libraryUser);
-        } catch (UserAlreadyExistsException e) {
-            printer.printLine(e.getMessage());
-        }
+        library.addUser(libraryUser);
     }
 
     private void printBooks() {

@@ -24,34 +24,26 @@ public class CsvFileManager implements FileManager {
         exportUsers(library);
     }
 
-    private void exportUsers(Library library) {
-        Collection<LibraryUser> users = library.getUsers().values();
-        try (FileWriter fileWriter = new FileWriter(USERS_FILE_NAME);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            for (LibraryUser libUser : users) {
-                bufferedWriter.write(libUser.toCSV());
-                bufferedWriter.newLine();
-            }
-        } catch (IOException e) {
-            try {
-                throw new DataExportException("Błąd zapisu danych do pliku " + USERS_FILE_NAME);
-            } catch (DataExportException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
     private void exportPublications(Library library) {
         Collection<Publication> publications = library.getPublications().values();
-        try (FileWriter fileWriter = new FileWriter(LIBRARY_FILE_NAME);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            for (Publication publication : publications) {
-                bufferedWriter.write(publication.toCsv());
+        exportToCsv(publications, LIBRARY_FILE_NAME);
+    }
+
+    private void exportUsers(Library library) {
+        Collection<LibraryUser> users = library.getUsers().values();
+        exportToCsv(users, USERS_FILE_NAME);
+    }
+
+    private <T extends CsvConvertable> void exportToCsv(Collection <T> collection, String fileName) {
+        try (FileWriter fileWriter = new FileWriter(fileName);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
+            for (T element : collection) {
+                bufferedWriter.write(element.toCsv());
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
             try {
-                throw new DataExportException("Błąd zapisu danych do pliku " + LIBRARY_FILE_NAME);
+                throw new DataExportException("Błąd zapisu danych do pliku " + fileName);
             } catch (DataExportException ex) {
                 ex.printStackTrace();
             }
@@ -73,7 +65,7 @@ public class CsvFileManager implements FileManager {
                 LibraryUser libUser = createUserFromString(line);
                 library.addUser(libUser);
             }
-        } catch (FileNotFoundException | UserAlreadyExistsException e) {
+        } catch (FileNotFoundException e) {
             try {
                 throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
             } catch (DataImportException ex) {
