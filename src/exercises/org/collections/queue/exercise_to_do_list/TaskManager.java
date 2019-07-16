@@ -18,9 +18,44 @@ public class TaskManager {
         }
     }
 
-    public void maniLoop(){
+    public void mainLoop(){
         Option next = null;
-        //TODO
+        while (next == null || next != Option.EXIT){
+            priontOptions();
+            next = Option.createFromInt(sc.nextInt());
+            sc.nextLine();
+            switch (next){
+                case ADD:
+                    taskQueue.add(readAndCreateTask());
+                    break;
+                case TAKE:
+                    takeTask();
+                    break;
+                case EXIT:
+                    System.out.println("Byee!");
+            }
+        }
+    }
+
+    private Task readAndCreateTask() {
+        System.out.println("Podaj nazwę zadania: ");
+        String name = sc.nextLine();
+        System.out.println("Podaj opis zadania: ");
+        String desc = sc.nextLine();
+        System.out.println("Podaj priorytet (LOW, MODERATE, HIGH)");
+        Task.Priority priority = Task.Priority.valueOf(sc.nextLine().toUpperCase());
+        System.out.println("Zadanie zostało dodane!");
+
+        return new Task(name, desc, priority);
+    }
+
+    private void takeTask() {
+        if (taskQueue.isEmpty()){
+            System.out.println("Brak zadań do wykonania!");
+        } else{
+            Task nextTask = taskQueue.poll();
+            System.out.print("Zadanie do wykonania: " + nextTask);
+        }
     }
 
     private enum Option{
@@ -32,6 +67,11 @@ public class TaskManager {
         Option(int option, String description) {
             this.option = option;
             this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return "\n" + option + " - " + description;
         }
 
         int option;
