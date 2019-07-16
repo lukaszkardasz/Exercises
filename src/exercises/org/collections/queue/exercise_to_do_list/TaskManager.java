@@ -64,17 +64,17 @@ public class TaskManager {
         EXIT(2, "Wyjdź z programu");
 
 
-        Option(int option, String description) {
-            this.option = option;
+        Option(int menuOption, String description) {
+            this.menuOption = menuOption;
             this.description = description;
         }
 
         @Override
         public String toString() {
-            return "\n" + option + " - " + description;
+            return "\n" + menuOption + " - " + description;
         }
 
-        int option;
+        int menuOption;
         String description;
 
         static Option createFromInt(int option){
