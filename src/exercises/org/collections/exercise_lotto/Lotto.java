@@ -12,40 +12,41 @@ public class Lotto {
     public static void main(String[] args) {
 
         generate(numbers);
-        List<Integer> randomNumbers = numbers.subList(0, 6);
-        randomize(randomNumbers);
-        checkResult(numbers);
-
-        enterData();
-
-
-        System.out.println(randomNumbers);
-
-
-
+        numbers = numbers.subList(0, 6);
+        randomize(numbers);
+        System.out.println(numbers);
+        List<Integer> listFromUser = enterData();
+        checkResult(listFromUser);
 
     }
 
-    private static void checkResult(List<Integer> numbers){
+    private static void checkResult(List<Integer> numbersFromUser) {
+        int match = 0;
 
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbersFromUser.contains(numbers.get(i))){
+                match++;
+            }
+        }
+        System.out.println("Trafień: " + match);
     }
 
     private static List<Integer> enterData() {
         System.out.println("Podaj 6 cyfr: ");
         List<Integer> numbersListFromUser = new ArrayList<>();
-        int count = 0;
-        while (count <= 6){
-            try(Scanner scanner = new Scanner(System.in)){
-                int fromUser = Integer.parseInt(scanner.nextLine());
-                numbersListFromUser.add(fromUser);
-            } catch (NumberFormatException e){
-                System.err.println("Niewłaściwe dane wejściowe, spróbuj jeszcze raz!");
-                continue;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int count = 0;
+            while (count < 6) {
+                System.out.println("Podaj kolejną liczbę: ");
+                numbersListFromUser.add(scanner.nextInt());
+                scanner.nextLine();
+                count++;
             }
-            count++;
+            return numbersListFromUser;
         }
-        return numbersListFromUser;
     }
+
+
 
     private static void generate(List<Integer> numbers) {
         Random random = new Random();
