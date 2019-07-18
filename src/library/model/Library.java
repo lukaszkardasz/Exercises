@@ -2,9 +2,9 @@ package library.model;
 
 import library.exception.PublicationAlreadyExistException;
 import library.exception.UserAlreadyExistsException;
+
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author n2god on 09/06/2019
@@ -12,23 +12,29 @@ import java.util.Map;
  */
 public class Library implements Serializable {
 
-
-    //zmieniony typ
     private Map<String, Publication> publications = new HashMap<>();
-    //dodane
     private Map<String, LibraryUser> users = new HashMap<>();
 
-    //zmieniony typ zwracany
     public Map<String, Publication> getPublications() {
         return publications;
     }
 
-    //dodany getter
+    public Collection<Publication> getSortedPublications(Comparator<Publication> comparator){
+        ArrayList<Publication> list = new ArrayList<>(this.publications.values());
+        list.sort(comparator);
+        return list;
+    }
+
+    public Collection<LibraryUser> getSortedUsers(Comparator<LibraryUser> comparator){
+        ArrayList<LibraryUser> list = new ArrayList<>(this.users.values());
+        list.sort(comparator);
+        return list;
+    }
+
     public Map<String, LibraryUser> getUsers() {
         return users;
     }
 
-    //dodana metoda i rzucany nowy typ wyjątku
     public void addUser(LibraryUser user) {
         if(users.containsKey(user.getPesel()))
             try {
@@ -41,7 +47,6 @@ public class Library implements Serializable {
         users.put(user.getPesel(), user);
     }
 
-    //zmieniona logika
     public void addPublication(Publication publication) {
         if(publications.containsKey(publication.getTitle()))
             try {
@@ -54,7 +59,6 @@ public class Library implements Serializable {
         publications.put(publication.getTitle(), publication);
     }
 
-    //zmieniona logika
     public boolean removePublication(Publication publication) {
         if(publications.containsValue(publication)) {
             publications.remove(publication.getTitle());

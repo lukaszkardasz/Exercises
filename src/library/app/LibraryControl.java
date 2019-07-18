@@ -1,12 +1,20 @@
 package library.app;
 
-import library.exception.*;
+import library.exception.DataExportException;
+import library.exception.DataImportException;
+import library.exception.NoSuchFiletypeException;
+import library.exception.NoSuchOptionException;
 import library.io.ConsolePrinter;
+import library.io.DataReader;
 import library.io.file.FileManager;
 import library.io.file.FileManagerBuilder;
-import library.model.*;
-import library.io.DataReader;
+import library.model.Book;
+import library.model.Library;
+import library.model.LibraryUser;
+import library.model.Magazine;
+import library.model.comparator.AlphabeticalTitleComparator;
 
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 /**
@@ -127,23 +135,28 @@ public class LibraryControl {
     }
 
     private void printBooks() {
-        printer.printBooks(library.getPublications().values());
+        printer.printBooks(library.getSortedPublications(new AlphabeticalTitleComparator()));
     }
 
     private void printMagazines() {
-        printer.printMagazines(library.getPublications().values());
+        printer.printMagazines(library.getSortedPublications(new AlphabeticalTitleComparator()));
     }
 
     private void printUsers() {
-        printer.printUsers(library.getUsers().values());
+        printer.printUsers(library.getSortedUsers(new Comparator<LibraryUser>() {
+            @Override
+            public int compare(LibraryUser u1, LibraryUser u2) {
+                return u1.getLastName().compareToIgnoreCase(u2.getLastName());
+            }
+        }));
     }
 
     private void deleteBook() {
         try {
             Book book = dataReader.readAndCreateBook();
-            if (library.removePublication(book)){
+            if (library.removePublication(book)) {
                 printer.printLine("Usunięto książkę");
-            } else{
+            } else {
                 printer.printLine("Brak książki.");
             }
         } catch (InputMismatchException e) {
@@ -177,7 +190,7 @@ public class LibraryControl {
     private enum Option {
         EXIT(0, "Wyjście z programu"),
         ADD_BOOK(1, "Dodanie książki"),
-        ADD_MAGAZINE(2,"Dodanie magazynu/gazety"),
+        ADD_MAGAZINE(2, "Dodanie magazynu/gazety"),
         PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
         PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet"),
         DELETE_BOOK(5, "Usuń książkę"),
@@ -201,7 +214,7 @@ public class LibraryControl {
         static Option createFromInt(int option) throws NoSuchOptionException {
             try {
                 return Option.values()[option];
-            } catch(ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new NoSuchOptionException("Brak opcji o id " + option);
             }
         }
