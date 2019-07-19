@@ -12,9 +12,7 @@ import library.model.Book;
 import library.model.Library;
 import library.model.LibraryUser;
 import library.model.Magazine;
-import library.model.comparator.AlphabeticalTitleComparator;
 
-import java.util.Comparator;
 import java.util.InputMismatchException;
 
 /**
@@ -135,20 +133,15 @@ public class LibraryControl {
     }
 
     private void printBooks() {
-        printer.printBooks(library.getSortedPublications(new AlphabeticalTitleComparator()));
+        printer.printBooks(library.getSortedPublications((p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle())));
     }
 
     private void printMagazines() {
-        printer.printMagazines(library.getSortedPublications(new AlphabeticalTitleComparator()));
+        printer.printMagazines(library.getSortedPublications((p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle())));
     }
 
     private void printUsers() {
-        printer.printUsers(library.getSortedUsers(new Comparator<LibraryUser>() {
-            @Override
-            public int compare(LibraryUser u1, LibraryUser u2) {
-                return u1.getLastName().compareToIgnoreCase(u2.getLastName());
-            }
-        }));
+        printer.printUsers(library.getSortedUsers((u1, u2) -> u1.getLastName().compareToIgnoreCase(u2.getLastName())));
     }
 
     private void deleteBook() {
