@@ -13,7 +13,7 @@ public class TryWithResources {
                 System.out.println(nextLine);
                 lines++;
             }
-            System.out.println("imion: " + lines);
+            System.out.println("Liczb: " + lines);
         } catch (IOException e) {
             System.err.println(e);
         }
