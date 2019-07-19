@@ -53,6 +53,8 @@ public class IteratorRemoverException {
             }
         }*/
 
+        //ConcurrentModificationException
+
         System.out.println(">>>> Pętla 4 - poprawna");
         while (namesIterator.hasNext()){
             String name = namesIterator.next();
