@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class MethodRef {
     public static void main(String[] args) {
-        String[] names = { "Kowalski", "Abacki", "Wojnarek", "Bednarek", "Krzywousty" };
+        String[] names = {"Kowalski", "Abacki", "Wojnarek", "Bednarek", "Krzywousty"};
         Arrays.sort(names, MethodRef::sortAscending);
         consumeArray(names, System.out::println);
 
