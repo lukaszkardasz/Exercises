@@ -10,7 +10,8 @@ public class ReferenceExercise {
     public static void main(String[] args) {
         List<String> names = Arrays.asList("Karol", "Wojtek", "Alicja", "Bartek", "Romek");
 
-        names.sort(String::compareToIgnoreCase);
+        Collections.sort(names, (String s1, String s2) -> s1.compareToIgnoreCase(s2));
+        //names.sort(String::compareToIgnoreCase);
         names.forEach(System.out::println);
     }
 }
