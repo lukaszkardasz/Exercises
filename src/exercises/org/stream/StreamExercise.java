@@ -24,5 +24,11 @@ public class StreamExercise {
                 .filter(x -> x % 2 == 0 && x > 5)
                 .collect(Collectors.toCollection(ArrayList::new))
                 .forEach(System.out::println);
+
+        Stream<String> stream = Stream.of("a", "aa", "b", "bb", "c" , "cc");
+        stream.map(String::toUpperCase)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+
     }
 }
