@@ -59,18 +59,14 @@ public class CsvFileManager implements FileManager {
     }
 
     private void importUsers(Library library) {
-        try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                LibraryUser libUser = createUserFromString(line);
-                library.addUser(libUser);
-            }
+        try (BufferedReader br = new BufferedReader(new FileReader(USERS_FILE_NAME))) {
+            br.lines()
+                    .map(this::createUserFromString)
+                    .forEach(library::addUser);
         } catch (FileNotFoundException e) {
-            try {
                 throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
-            } catch (DataImportException ex) {
-                ex.printStackTrace();
-            }
+            } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku: " + USERS_FILE_NAME);
         }
     }
 
