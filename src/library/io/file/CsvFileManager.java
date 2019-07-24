@@ -83,22 +83,18 @@ public class CsvFileManager implements FileManager {
     }
 
     private void importPublications(Library library) {
-        try (Scanner fileReader = new Scanner(new File(LIBRARY_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                Publication publication = createObjectFromString(line);
-                library.addPublication(publication);
-            }
-        } catch (FileNotFoundException | InvalidDataException e) {
-            try {
-                throw new DataImportException("Brak pliku " + LIBRARY_FILE_NAME);
-            } catch (DataImportException ex) {
-                ex.printStackTrace();
-            }
+        try (BufferedReader br = new BufferedReader(new FileReader(LIBRARY_FILE_NAME))) {
+            br.lines()
+                    .map(this::createObjectFromString)
+                    .forEach(library::addPublication);
+        } catch (FileNotFoundException e){
+            throw new DataImportException("Brak pliku: " + LIBRARY_FILE_NAME);
+        } catch (IOException e){
+            throw new DataImportException("Nieznany typ publikacji: " + LIBRARY_FILE_NAME);
         }
     }
 
-    private Publication createObjectFromString(String csvText) throws InvalidDataException {
+    private Publication createObjectFromString(String csvText) {
         String[] split = csvText.split(";");
         String type = split[0];
         if(Book.TYPE.equals(type)) {
