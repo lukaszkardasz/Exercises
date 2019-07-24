@@ -25,10 +25,22 @@ public class StreamExercise {
                 .collect(Collectors.toCollection(ArrayList::new))
                 .forEach(System.out::println);
 
-        Stream<String> stream = Stream.of("a", "aa", "b", "bb", "c" , "cc");
-        stream.map(String::toUpperCase)
+        Stream<String> stream = Stream.of("a", "aa", "b", "bb", "c", "cc");
+        List<String> stringList = stream
+                .peek(System.out::println)
+                .map(String::toUpperCase)
                 .peek(System.out::println)
                 .collect(Collectors.toList());
+
+        Stream<Integer> numStream = Stream.iterate(0, x -> x + 1);
+
+        //limit liczb od 1 do 100
+        List<Integer> squareNumbers = numStream
+                .map(x -> x * x)
+                .limit(100)
+                .collect(Collectors.toList());
+
+        //limit liczb
 
     }
 }
