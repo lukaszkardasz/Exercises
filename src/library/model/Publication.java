@@ -9,10 +9,10 @@ public abstract class Publication implements Serializable, Comparable<Publicatio
     private String publisher;
     private Year year;
 
-    Publication(String title, String publisher, Year year) {
+    Publication(String title, String publisher, int year) {
         this.title = title;
         this.publisher = publisher;
-        this.year = year;
+        this.year = Year.of(year);
     }
 
     public Year getYear() {

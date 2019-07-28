@@ -1,11 +1,7 @@
 package exercises.org.generics.exercise_generics;
 
-import javafx.scene.input.KeyCode;
 
 import java.math.BigInteger;
-
-import static javafx.scene.input.KeyCode.T;
-import static javafx.scene.input.KeyCode.V;
 
 /**
  * @author n2god on 11/07/2019

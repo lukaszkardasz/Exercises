@@ -11,10 +11,10 @@ public class Magazine extends Publication {
     private MonthDay monthDay;
     private String language;
 
-    public Magazine(String title, String publisher, Year year, MonthDay monthDay, String language) {
+    public Magazine(String title, String publisher, String language,int year, int month, int day) {
         super(title, publisher, year);
-        this.monthDay = monthDay;
         this.language = language;
+        this.monthDay = MonthDay.of(month, day);
     }
 
     public static String getTYPE() {
