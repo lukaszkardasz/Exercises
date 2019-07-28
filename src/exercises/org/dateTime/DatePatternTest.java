@@ -11,9 +11,9 @@ public class DatePatternTest {
         System.out.println("Tworzę nowe wydarzenie.");
         System.out.println("Podaj datę i godzinę w formacie dd-MM-yyyy HH:mm");
 
-        DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String dateTimeInput = sc.nextLine();
         LocalDateTime createdDateTime = LocalDateTime.parse(dateTimeInput, dateTimePattern);
-        System.out.println("Wydarzenie utworzone na dzień " + createdDateTime);
+        System.out.println("Wydarzenie utworzone na dzień " + createdDateTime.format(dateTimePattern));
     }
 }
