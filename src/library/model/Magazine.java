@@ -1,36 +1,38 @@
 package library.model;
 
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.Year;
 import java.util.Objects;
 
 public class Magazine extends Publication {
     public static final String TYPE = "Magazyn";
 
-    private int month;
-    private int day;
+    private MonthDay monthDay;
     private String language;
 
-    public Magazine(String title, String publisher, String language, int year, int month, int day) {
+    public Magazine(String title, String publisher, Year year, MonthDay monthDay, String language) {
         super(title, publisher, year);
+        this.monthDay = monthDay;
         this.language = language;
-        this.month = month;
-        this.day = day;
     }
 
-    public int getMonth() {
-        return month;
+    public static String getTYPE() {
+        return TYPE;
     }
-    public void setMonth(int month) {
-        this.month = month;
+
+    public MonthDay getMonthDay() {
+        return monthDay;
     }
-    public int getDay() {
-        return day;
+
+    public void setMonthDay(MonthDay monthDay) {
+        this.monthDay = monthDay;
     }
-    public void setDay(int day) {
-        this.day = day;
-    }
+
     public String getLanguage() {
         return language;
     }
+
     public void setLanguage(String language) {
         this.language = language;
     }
@@ -41,8 +43,8 @@ public class Magazine extends Publication {
                 getTitle() + ";" +
                 getPublisher() + ";" +
                 getYear() + ";" +
-                month + ";" +
-                day + ";" +
+                monthDay.getMonthValue() + ";" +
+                monthDay.getDayOfMonth() + ";" +
                 language + "";
     }
 
@@ -52,18 +54,17 @@ public class Magazine extends Publication {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Magazine magazine = (Magazine) o;
-        return month == magazine.month &&
-                day == magazine.day &&
+        return Objects.equals(monthDay, magazine.monthDay) &&
                 Objects.equals(language, magazine.language);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), month, day, language);
+        return Objects.hash(super.hashCode(), monthDay, language);
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", " + month + ", " + day + ", " + language;
+        return super.toString() + ", " + monthDay.getMonthValue() + ", " + monthDay.getDayOfMonth() + ", " + language;
     }
 }
