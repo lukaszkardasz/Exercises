@@ -11,9 +11,14 @@ public class PersonDatabase {
         if (person == null) {
             throw new NullPointerException("Cannot add null to list");
         }
-        if (findById(person.getId()).isPresent()) {
+
+        /* można napisać tak: if (findById(person.getId()).isPresent()) {
             throw new IllegalArgumentException("Person with this id already exist");
         }
+        mozna zapisać tak:
+        */
+        findById(person.getId())
+                .ifPresent(p -> new IllegalArgumentException("Osoba o podanym id już istnieje!"));
         people.add(person);
     }
 
@@ -24,5 +29,25 @@ public class PersonDatabase {
             }
         }
         return Optional.empty();
+    }
+
+    public String findLastNameById(int id) {
+        /* przed mapowaniem for (Person person : people) {
+            if (person.getId() == id) {
+                return person.getLastName();
+            }
+        }
+        return "Anonim";*/
+
+        //mapujemy jeden optional na drugi, żeby jeszcze raz nie przeszukiwać listy chcąc znaleść nazwisko jak mamy już id
+        return findById(id) //Optional<Person>
+                .map(Person::getLastName) //Optional<String>
+                .orElse("Anonim"); //
+        /*
+        lub zwyczajnie: if(optionalLastName.isPresent())
+        return optionalLastName.get();
+        else
+        return "Anonim";
+        */
     }
 }
