@@ -48,10 +48,10 @@ public class Book extends Publication {
         return (TYPE + ";") +
                 getTitle() + ";" +
                 getPublisher() + ";" +
-                getYear() + ";" +
+                getYear() + "; " +
                 author + ";" +
                 pages + ";" +
-                isbn + "";
+                isbn +"";
     }
 
     @Override

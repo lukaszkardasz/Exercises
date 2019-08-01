@@ -15,8 +15,8 @@ import java.util.Scanner;
  * @project Exercises
  */
 public class CsvFileManager implements FileManager {
-    private static final String LIBRARY_FILE_NAME = "C:\\java\\Exercises\\src\\library\\Library.csv";
-    private static final String USERS_FILE_NAME = "C:\\java\\Exercises\\src\\library\\Library_users.csv";
+    private static final String LIBRARY_FILE_NAME = "C:\\Java\\LibraryApp v4\\src\\library\\Library.csv";
+    private static final String USERS_FILE_NAME = "C:\\Java\\LibraryApp v4\\src\\library\\users.csv";
 
     @Override
     public void exportData(Library library){
